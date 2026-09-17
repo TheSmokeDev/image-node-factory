@@ -2,6 +2,7 @@
   "schema_version": 1,
   "files": {
     ".gitattributes": "a79691a93b46e49ce460c26ef22afcc03d6eca1e63bf2edbc20e96159510f6c9",
+    ".gitignore": "f76e0cc89e965a3ff67ee028d7273b29255ddfba1a6b5efebd180a26d6c19e8c",
     "marketplace/image-node-factory/scripts/style-corpus.py": "feefd49c460031d2a8da3fccbb65d7bd94583aa81c99404b0dca1016ea843477",
     "marketplace/image-node-factory/scripts/style_sources.py": "0672838b7bd6233db74409d5f516a2bbcd1be00e7884a193937515b82e1ee2e3",
     "marketplace/image-node-factory/scripts/style-sources.json": "53ab7a3c75d8d5f541414b39793e6cb8af5db2350a09ffac178b724218f1ed5c",
@@ -27,7 +28,7 @@
     "marketplace/image-node-factory/image-nodes/realistic-photography.md": "9f93d8bc9bc467973100a1cfd11de945f1b9adbc42c3472999fcb3af70956a3f",
     "marketplace/image-node-factory/image-nodes/typography-poster.md": "8c522db7e1f6aa612b798d50cc0bcb70b789874cc289eb29e503f0f4a0a03394",
     "marketplace/image-node-factory/image-node-factory.yaml": "eb41b08fd69b8ac93d250a97b2114470c31e87314c680baae75b67325ff6fd68",
-    "tests/test_style_corpus.py": "686bb593f6767220df0426030f4fc6829e022d1db30178662dda6eed1fb243eb",
+    "tests/test_style_corpus.py": "1f7660eeb39a1de31ce01b861eaae7e52ce26d71dc818061e1cfadb594d139e8",
     "tests/test_pack_validate.py": "23e9be0bc8d9ef25181ac1e4e9b618acaf97a16dfd8f18eb21ea66d7a89c324f",
     "tests/test_image_factory_sources.py": "1b157b7855215b51bd19a0b8af4fb0f2629357dd3b323778e4fd15fa3dddd580",
     "tests/test_image_render_validate.py": "8bdeac5c0232594c0a366cd5d8e7b1efb7c8dd9f7fbc1e3bcf54c33e6ff014a9",

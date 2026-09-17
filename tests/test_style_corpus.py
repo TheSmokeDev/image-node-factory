@@ -201,12 +201,12 @@ def test_prime_installs_atomically(tmp_path, monkeypatch):
     assert not list(tmp_path.glob("**/*.tmp.*")), "staging dir must not survive"
 
 
-def test_http_get_is_monkeypatchable_via_module_attr(monkeypatch):
+def test_http_get_is_monkeypatchable_via_module_attr(monkeypatch, tmp_path):
     """Rule 3: prime() must resolve _http_get through the module, not a bound import."""
     calls = []
     monkeypatch.setattr(sc, "_http_get", lambda url: calls.append(url) or b"x")
     with pytest.raises(sc.CorpusMissing):
-        sc.prime(cache_dir=Path("/nonexistent-cache-root"))
+        sc.prime(cache_dir=tmp_path / "unprovisioned")
     assert calls, "prime() did not route through the module-level seam"
 
 
