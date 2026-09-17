@@ -1,0 +1,9 @@
+name: tests
+on: [push, pull_request]
+jobs:
+  portable:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+      - run: uv run --with pytest --with pyyaml --with pillow --with 'qrcode[pil]' --with zxing-cpp pytest tests -q

@@ -21,9 +21,10 @@ Read:
 - `$ARTIFACTS_DIR/image-node-prompt-pack.json`
 - `$ARTIFACTS_DIR/image-node-imagegen-packet.json`
 - `$ARTIFACTS_DIR/images/manifest.json`
+- `$ARTIFACTS_DIR/image-node-render-receipt.json` when rendering was requested
 - `$ARTIFACTS_DIR/qa-report.md`
 - Upstream QA JSON: `$qa.output`
-- Upstream render JSON if present: `$render.output`
+- Upstream parallel-render JSON if present: `$render.output`
 
 Write:
 - `$ARTIFACTS_DIR/image-node-final-report.md`

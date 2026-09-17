@@ -1,0 +1,1058 @@
+{
+  "schema_version": 1,
+  "policy": "Commercial utility, complete prompt, traceable author/source, retain house constraints; metadata only, no prompt bodies.",
+  "decisions": {
+    "zerolu:celebrity-in-real-life": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "40ba4b30c90989142ab483efc169d762b9d70f4e25084774abce7fab1a8a7c66"
+    },
+    "zerolu:convenience-store-night-scene": {
+      "decision": "include",
+      "reason": "Natural multi-person lighting and environmental detail.",
+      "prompt_sha256": "cab2ecd8743c036487f8e95f53793fcf1ba2f4f3aeaf269a50b2f6c7b014d4ea",
+      "category": "Photography & Realism",
+      "template_id": "realistic-photography",
+      "styles": [],
+      "scenes": []
+    },
+    "zerolu:raw-iphone-quality-subway-station": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "83f2d72152e06c467d73c2d1f765262bae593e99e8cbd5a1037ec0289acd1a5e"
+    },
+    "zerolu:apple-park-keynote-crowd-shot": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "638c09e89e6d75ab4a0033b7ec1f45532327deaa65c4f989ed76cc09a43f4e9e"
+    },
+    "zerolu:handwritten-notebook-photo": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "3e66ececf89e7f3afaa5b8406d4f500c9924a00e4172106470899ace37e78188"
+    },
+    "zerolu:rice-grain-micro-typography": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "3ffff259512b9d2752b10846a9ff11ce1a7ef24c2d5dd37895d21f2b81fc0d62"
+    },
+    "zerolu:360-equirectangular-panorama": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "a884870242a90bea01483aada74cb373bf426121b3e51e1dc70677673259f18b"
+    },
+    "zerolu:japanese-onsen-ryokan-portrait": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "d08e3a5febcd08ca5df319b5f05abc622dab78b00c9f9248ce747a6d902f0bcd"
+    },
+    "zerolu:basketball-court-direct-flash-portrait": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "09e83f2c0cd41974f604f07fca42018b7d8c69044cab888f17a34b7cf294f069"
+    },
+    "zerolu:korean-editorial-portrait-with-soft-mist": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "9742f387312d43fa88800e1c1af3d1dc1de15b4c5c7e4c601002d6fdb2c7ddde"
+    },
+    "zerolu:subway-candid-photo": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "86df2eaaa3c35f53e20411398cd63b3685f3a5c237d8ea99b150f87a1cfd94c2"
+    },
+    "zerolu:90s-point-and-shoot-aesthetic": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "b16c2f669428fabef4b0c405b23fc2918fc7646d759edf81ac670c52afbd22c0"
+    },
+    "zerolu:2003-digital-camera-family-snapshot": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "71f85f8be4ca5d1ee73c7f78636e97224ebd21e1df1e0a4445b4d7a65861f930"
+    },
+    "zerolu:hitman-style-in-game-footage": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "c1a719312b67a138614de8ef72501d57063e47e597b0be324c4ec2cee8d13e4f"
+    },
+    "zerolu:black-myth-wukong-game-scene": {
+      "decision": "exclude",
+      "reason": "Original author/source attribution is missing from this entry.",
+      "prompt_sha256": "37a39606469219969e0ba255ff68c72e8be2abe958cd55f1ea4aaa70172f8cd1"
+    },
+    "zerolu:gta-6-style-in-game-footage": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "f47946b7cac76f09972f3b0d110aab4667c9c29911e6830d2a521230287b4428"
+    },
+    "zerolu:gta-6-wedding-mission-screenshot": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "920ea0546ce989f875989a8e13543e5b642f2dd2f387d57f509fa560b33d0ff1"
+    },
+    "zerolu:league-of-legends-mid-lane-screenshot": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "2a1bdd2d966003d0af25902ad6f75e4b27674be884c7023f16d042fdcea9fcda"
+    },
+    "zerolu:100-pixel-art-items-grid": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "9a26862e1f2c59237631dafae398045fc78e9013ac2763bc552b0e4afc3530fb"
+    },
+    "zerolu:zelda-tears-of-the-kingdom-style": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "0783dddcdb2d32a8d2ef0d1bf39621b17e1ec3ed35ac292380c90318f72768b1"
+    },
+    "zerolu:gta-san-andreas-gameplay-screenshot": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "db2954a483447d52719026ca9a2c7c68e283a407183989f095c19a40f39d4a97"
+    },
+    "zerolu:japanese-social-game-gacha-screen": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "d00d326a025d67bf121eec6f495738e4d68754c47f0ae07d27da062624858b86"
+    },
+    "zerolu:gta-6-livestream-gameplay-screenshot": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "32b607265067f06cadb2b6a9796ae7145e3b698d15b662060eafe98f2cad0082"
+    },
+    "zerolu:live-streaming-screenshot": {
+      "decision": "exclude",
+      "reason": "Original author/source attribution is missing from this entry.",
+      "prompt_sha256": "c47d514addb26e5bc6388b3f3ef4826253ecdf882febb0f9d046658f6f88f212"
+    },
+    "zerolu:douyin-livestream-screenshot": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "4faaa15c996f041b088c4cb2d677cf85bfcc241800dc7d7429d9b24dec0a5c5b"
+    },
+    "zerolu:youtube-time-travel-screenshot": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "2641626aa4c9126d869b024c766b8f646f0e28d9c2cfdf1f56b3c1f74f0f22a5"
+    },
+    "zerolu:song-dynasty-social-media-feed": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "270035fb739b11148c1553f168debe09dffa5996c2c98debe06f8469eb0f49ec"
+    },
+    "zerolu:ancient-figures-on-modern-social-platforms": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "8d84b6b1a306a7a6964557e394f4e60488fe88ae98cbeda3e0c6d603658bd656"
+    },
+    "zerolu:e-commerce-app-homepage": {
+      "decision": "include",
+      "reason": "Explicit interface hierarchy and spacing; adapt labels to the brief.",
+      "prompt_sha256": "f5c869a6131ef6873c535b475f08e871a9cae5e5d9655299e26113e70ec2c6d7",
+      "category": "UI & Interfaces",
+      "template_id": "ui-screenshot-system",
+      "styles": [],
+      "scenes": []
+    },
+    "zerolu:music-player-interface": {
+      "decision": "include",
+      "reason": "Coherent dark interface hierarchy and component states.",
+      "prompt_sha256": "18881de7b4e4762c918db29cdc7deaa0f8b2426685276f39ba94c579f72fd29a",
+      "category": "UI & Interfaces",
+      "template_id": "ui-screenshot-system",
+      "styles": [],
+      "scenes": []
+    },
+    "zerolu:custom-style-ui-design-system": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "893d163ef6fa41a9c6f00e5a6135818cfc557f9a840cd3f50b61ca69ff772a71"
+    },
+    "zerolu:t-800-taobao-product-detail-page": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "31cafc439c5eec21ac584d2ee7c3f6d6ed4caf43d7996468510ff365701c9c4e"
+    },
+    "zerolu:xuanwu-gate-incident-moments-feed": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "b59947ffa13e7f06231a5f1e33c879558c28ea2af8d35771e1c079faa9e60303"
+    },
+    "zerolu:wechat-chat-interface-smartphone-photo": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "5d2195fd87e42d75669bdb6bdf15bc8c1b4f2959f970cefbb6f63ec3df3cdb01"
+    },
+    "zerolu:ximen-qing-100-panel-storyboard": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "0ff81d700e3be62379db558eda7f821d7c32573cd1cc3ccf478ad9993512fbc9"
+    },
+    "zerolu:movie-collage": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "5aa066ea169cc2315a11cbcbb717a4c64310653eac2a87ef5912ecf23f24d50f"
+    },
+    "zerolu:where-is-your-name-crowd-search-poster": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "1ca6b8c1f8ef255bc4b307eede2b23373616d519513886a5962d64b9161e800d"
+    },
+    "zerolu:eight-panel-gpt-image-2-launch-manga": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "24155bb5601aca6b36a31c29204079fb00cd538a7b5ffe555a66f80e19b14dcb"
+    },
+    "zerolu:1980s-propaganda-poster": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "702c9ae9b2544c5603de1463aff76b3fe097bff23b58ca8f5db0117fbcf0a0da"
+    },
+    "zerolu:the-deer-and-the-cauldron-character-poster": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "14f40563b311e13e258c058742f02b2cba6be2133d2a8257420dc30afa3f50ed"
+    },
+    "zerolu:celebrity-car-endorsement-poster": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "3039578f5884bd986ae41b7ec0fc5c4ec8189ef2924ad5ae814703ae40c2394e"
+    },
+    "zerolu:chinese-tea-drink-product-launch-poster": {
+      "decision": "exclude",
+      "reason": "Original author/source attribution is missing from this entry.",
+      "prompt_sha256": "bdf001334c09889c4d0df92e479b766b30770cb37e0f656937b1f84500467a29"
+    },
+    "zerolu:coffee-journey-infographic": {
+      "decision": "exclude",
+      "reason": "Original author/source attribution is missing from this entry.",
+      "prompt_sha256": "a83a0040ad0070c30352f0a1d30212b11b7186863cb09517418b3ef992f46265"
+    },
+    "zerolu:\u006bey-character-relationship-map": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "8fecf7c89c35c487216b3f25de69acd9edbc5ec0f00917e8503a204e50d6a2c6"
+    },
+    "zerolu:jingdezhen-blue-and-white-porcelain-diagram": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "6867b9752aaae09cb4280c329a8e2a181071f269cc72a470ab9aba9c7dee45b0"
+    },
+    "zerolu:museum-catalog-style-chinese-disassembly-infographic": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "266ef7416288cac8f76861c7007ddb9e65aaee118e51fdfefcbd21eea728492f"
+    },
+    "zerolu:high-end-skincare-product-poster": {
+      "decision": "exclude",
+      "reason": "Original author/source attribution is missing from this entry.",
+      "prompt_sha256": "ed62f9ccc5884f3cdee671c3b9cbdeede637d62afd7755ce233d46fe8e209f0f"
+    },
+    "zerolu:minimal-design-prompt-collection": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "d9907d4b121577a4a2f37dd77d9a51beb7e7ee58f90c829cc836b55b96b90b68"
+    },
+    "zerolu:chinese-calligraphy-manuscript-recreation": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "ae4530908d517168d8b47b68d9575fce13984bd8956a35eea434353cde73b50e"
+    },
+    "zerolu:chinese-calligraphy-copybook-sheet": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "fb254879561432dec0a2e6671927bcfadd0a776dc693d380f742abd4b6adee16"
+    },
+    "zerolu:silhouette-universe-narrative-poster": {
+      "decision": "include",
+      "reason": "Subject-driven silhouette and integrated narrative depth.",
+      "prompt_sha256": "74ed0cb2abe62cd63d3561247c93ac16327de8c9355fb54646fafdb64772cf07",
+      "category": "Posters & Typography",
+      "template_id": "poster-layout-system",
+      "styles": [],
+      "scenes": []
+    },
+    "zerolu:e-commerce-product-detail-page": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "f076251837dd5744dbb9c26dee5ccab099d9f104eb55db57ee33793c9da247b8"
+    },
+    "zerolu:dense-chinese-layout-stress-test": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "fb1bb86fbab87d4e0f569e64205948652c47330965bb55e7fcc22148c30f06b1"
+    },
+    "zerolu:handwritten-chinese-medical-prescription": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "32ea47821dd5c33cb9a3705adb5a225c1ae8b9e840c0e1880dd0b8d2647a2029"
+    },
+    "zerolu:world-time-analog-clock-wall": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "b3ae3108b96f45393cd053459a75a13b377a85bfec038d8c9d39572004c173c9"
+    },
+    "zerolu:encyclopedia-style-knowledge-card": {
+      "decision": "include",
+      "reason": "Reusable information hierarchy and detail callouts; use supplied facts only.",
+      "prompt_sha256": "e8135cd84eeffdc9e01b6591a72ad102eac03a12fa1391db8c95250c64245577",
+      "category": "Charts & Infographics",
+      "template_id": "infographic-engine",
+      "styles": [],
+      "scenes": []
+    },
+    "zerolu:alphabet-object-grid": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "8c482dd43da152af44d0448b03c842188fc7675bcec67bf5923aefd86ac626d2"
+    },
+    "zerolu:100-elements-scene-inventory": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "589ca87594027d0cf57b122cb616f5f64c929e2374e3b4cab98214cb0efb5fb8"
+    },
+    "zerolu:100-technology-topics-grid": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "9bdb04c0446fa62deb522dab0877b4a46eda8db86e265aa27327c3ed0a3fd3f2"
+    },
+    "zerolu:fitness-training-infographic": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "4131608c212bb50942bd02b5099c8d81240c80442f5cf25673303a1601d60e3b"
+    },
+    "zerolu:gaokao-exam-paper-replica": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "a96338746f35209f39ed5e9783fd095229ce29b9fda4b98db9d4579a2ae2d018"
+    },
+    "zerolu:three-day-travel-guide-card": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "c6fdd09400be51657da2905a7446d3debaf8173f65a0bed28c272769bc825bb6"
+    },
+    "zerolu:personal-color-analysis-diagram": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "eed497e62d26cd66fe59cea5dcb43c7751de588ab497f1881e03ed849853d5b8"
+    },
+    "zerolu:polo-shirt-color-comparison-analysis": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "7f04a6fb9ddccdb22b6034a659fdd60cba64e083ebc48d574fbd8eaee1353f61"
+    },
+    "zerolu:hairstyle-comparison-analysis": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "034b6a009f1f0e9ec37ec698b3f1d3aeb7c50edb7e467ba7955e1efda8e8ecc5"
+    },
+    "zerolu:codex-chalkboard-article-visualization": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "bda0153409f32312e36e93571be10e6271a1206fd4795dae67472206eba8423b"
+    },
+    "zerolu:character-relationship-diagram-poster": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "19492cc7993397ddd23e08016844b12bf919e14a827713d1bbdadcba36b03d0d"
+    },
+    "zerolu:16-panel-anime-expression-grid": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "2d6c86e14d93e0d2ef515deaea07582557afaeb560a7d0ec5f31e78f6daaf9a4"
+    },
+    "zerolu:official-character-reference-sheet": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "72e700f7263266f23252e172356a7ee89d999f55d189ec0e9ec1818f2ce18ea5"
+    },
+    "zerolu:pro-instagram-photo-enhancement": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "cee3964ac98c2df4ab527c0045815e62ffe1d42e0676a5a2efcbf18a144d35bd"
+    },
+    "zerolu:pet-brand-collaboration-poster": {
+      "decision": "exclude",
+      "reason": "Original author/source attribution is missing from this entry.",
+      "prompt_sha256": "f20b5c4331aaccf30bdbc5f290a16faadb1bdcc8be6d3da0b2476b91a826ecc9"
+    },
+    "zerolu:comic-page-coloring-translation": {
+      "decision": "exclude",
+      "reason": "Original author/source attribution is missing from this entry.",
+      "prompt_sha256": "2033508e6133070cf3b9fc215433ffbe27b95e6eec9fd1572766d8e769b9acad"
+    },
+    "youmind:13460": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "4c57345c36ee232b9aaef41bcd4a82891a30c8e2c01496de7c37f1dabb7bfd0f"
+    },
+    "youmind:13515": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "a38def81926555be45fce5641b7b23794f8fe71c6e9a7e5c55642394f3fa87c4"
+    },
+    "youmind:13983": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "b86a025959e1cd201c9552e41ce6c740c41f32f8f0995e95f89a77884d846c2f"
+    },
+    "youmind:14036": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "a46cf16e4a74896faad509c49f914772df2e9dbb7f6c92299fe8232a18a8c317"
+    },
+    "youmind:13467": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "366a884dc4c2f9fc0ab9179e42c38c70b70dc58951488d3f9ee34bcb7fdc2781"
+    },
+    "youmind:13491": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "9749e71d45eaf3d17ce6c51c6a79965b9b2e574abe00c64325999e9c197f797c"
+    },
+    "youmind:34776": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "ef542604ea69748eae5bc8998eb8615a6cdb6015186d04e7864b5c279c005cd4"
+    },
+    "youmind:34764": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "442e9375ead9a580d7b1db4c2cc1d083675b57a02f4116abbd4766fafe35d5dc"
+    },
+    "youmind:34766": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "105e6f71188c5c6c77050e771627f32c9583718d4f3707c23411784b62e29225"
+    },
+    "youmind:34763": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "3a35c5e1da96bd3d4f5a1f2e749dd0542c5c7b8ea4893c802c24e5276e8efd4a"
+    },
+    "youmind:34757": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "dea061f6985025b3f025ac042aeabbf4c8ed6f2866298bac182fae62faefb440"
+    },
+    "youmind:34753": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "331b9767aebfbdfa5947068fe191880ba2091b14406052a0fa06a82490f3628d"
+    },
+    "youmind:34769": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "fabdaf73e06e931b09529b338da9a7db9cc60fbd647394f6980394ea807f33bf"
+    },
+    "youmind:34675": {
+      "decision": "include",
+      "reason": "Reference-based natural headshot composition; house identity and skin-tone rules override stylistic changes.",
+      "prompt_sha256": "928322867a261b17e1a7ef3198c9f224930c891fc9b1ac49ed5c1f7bc5e48110",
+      "category": "Photography & Realism",
+      "template_id": "realistic-photography",
+      "styles": [],
+      "scenes": []
+    },
+    "youmind:34679": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "8591611ba3b3885fca44c99ebf8621d970ad493b4cc18a123d4ace0e02d02727"
+    },
+    "youmind:34684": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "6e13a8b90977654e2770e7bb46486c53b2d5d46d82d2f334fa55be44809e6faa"
+    },
+    "youmind:34762": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "dbc485cdb18c7bb8f36f4fdca7fdc0241e7ed726c2039dac51339de594b862c0"
+    },
+    "youmind:34673": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "b47d59c9391c48a6fc882390ae28bf7a7dcf52cfb7adfb537eb93534a401cfbc"
+    },
+    "youmind:34770": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "856eed2a58dfb0d2896538f00b307fee3498866710cfc6e3d1170b21b7f2d1fd"
+    },
+    "youmind:34775": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "c717c37478ce7cdf467049ea17b8f997393f1756af729b90d1ea573bf87cc2cd"
+    },
+    "youmind:34678": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "6a7c47cdd7be4d04f6b50a24db7511ca0caf723ee4df62d7383f80028319a0e9"
+    },
+    "youmind:34654": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "27775e4ff438d281a34195aae5aa07adf37365a8bdbd87dc08a6c0c837850f50"
+    },
+    "youmind:34655": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "359898930c0cb15828f2e6c87a04e16d8a7fc2effb6d34696fa620da6870d53d"
+    },
+    "youmind:34638": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "e8efa8d69fae7a640cad0493058eb68da55c1e62b40375710f9b6a835afa72e5"
+    },
+    "youmind:34651": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "79584eef2580932c638ccd8c66fbdfde793ea748e21bc880a3f66ca6264ef548"
+    },
+    "youmind:34642": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "844cffbc161584aae440330036061b9ebc8c56a8125bf15a9bb0b17f92cccfd5"
+    },
+    "youmind:34754": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "f60c96b084380d54da5106c7005511aee3543d4a03d5a76e339383e62f2e2685"
+    },
+    "youmind:34761": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "fecfaf8ac2be40a964fcafcaaf117943bddef314e033ab29c1d8097416f54064"
+    },
+    "youmind:34759": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "b214844ddfe59ca126a3a19a91bc5a76584504344af74ca1658ecc8dd10861b1"
+    },
+    "youmind:34771": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "a75b8161f10bf791163b6f6bdacbc5bd7825ba07ebec8233e3855dd5d38b1619"
+    },
+    "youmind:34772": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "f2726e027972518c08a7768283ac5e70dd3e4a91f265245aa44e11ff76668535"
+    },
+    "youmind:34765": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "9a3aae4d58b715f74d361423d1fcfe3fe190f4dca4b0a232fe876776e7c9caf5"
+    },
+    "youmind:34683": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "7dc0d7d9a8270327d3fb9928e8d872eb49e7a1f35a80a2979bb28ec8a82855e7"
+    },
+    "youmind:34680": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "af7be025cbca5b5cbcee3d7e6602f8ba899361c2a1dbf30fca51d733173edd7e"
+    },
+    "youmind:34758": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "e1dac0ed5ecedce8cfb1b35b4b606be5742cfa9019651fd87ca0fa113b314f57"
+    },
+    "youmind:34674": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "5de0b037cf126c324fae77e157bda979bf4d41d01926d86d557a12c170a36189"
+    },
+    "youmind:34755": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "3162463cc65f5745c513dd540c9e7e9b927de2a4062fb2eb1ae7a205a620baf7"
+    },
+    "youmind:34682": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "ece9f724b2f3753faa7fb2c947890338092166d30fb1c97878089d3887b0be0a"
+    },
+    "youmind:34685": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "ccd1b71c949175cce7ea826379d096b3208e4184919be5064ed3713067275936"
+    },
+    "youmind:34689": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "314204d530f81c35027d8845b576c44ed352df2d8bcf05a222edd8f0c3636ef6"
+    },
+    "youmind:34687": {
+      "decision": "include",
+      "reason": "Technical process flow integrated with editorial imagery; replace all example facts and text.",
+      "prompt_sha256": "2efc4089fd2a1b8ca651a7b46ed7a649c46812fe5067e6329330fcabe15aa7e4",
+      "category": "Charts & Infographics",
+      "template_id": "infographic-engine",
+      "styles": [],
+      "scenes": []
+    },
+    "youmind:34648": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "c381a32c2c41aa54daadd63ab82b81e92cb5183d63eaf9fcc8045bfa71444756"
+    },
+    "youmind:34464": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "c470b6a1f528a2eef345bd6cc27be761dcd400b632c822fc70b4328a70c9e296"
+    },
+    "youmind:34333": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "e850333fb11c0a01fe6f9bfa3e37f247733b12c96e8c1a1e12a70e4488217ae3"
+    },
+    "youmind:34210": {
+      "decision": "exclude",
+      "reason": "Source text ends inside an unfinished title placeholder; incomplete prompt.",
+      "prompt_sha256": "f3d355d69bd0e44005ba7e56b2270ce0947c252e922fef86522e06fe263c2a15"
+    },
+    "youmind:34145": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "df0c6e7348df9425b9525bb4cb75eae8b7f8261b097cec582c3a2e2e27c59da1"
+    },
+    "youmind:34148": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "5bf8dce2c95e51261b3d6cfecfc6b37d469d1d5f43fef6b0522064c204830d27"
+    },
+    "youmind:34024": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "5a72ff7b9600c75fbc7d2c3f2038648039f7001f2904c24afe26f8dffa7e1a3f"
+    },
+    "youmind:34019": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "81d83449e69b94e69c48d4adb2de869d5d7dc018f885d81e2146db23e0215aec"
+    },
+    "youmind:34031": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "71b1292ea77288feda38d14bc79a423c474d621a054512c30826b771db184922"
+    },
+    "youmind:34068": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "caea09c74d63f4823f9a749fab00c4a6927efdb1eabef87a69e27712df721760"
+    },
+    "youmind:34016": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "32c01f3f2e98eb80bc5b22aaad8ef2bf2f10e52af562ac60e6964287c432459a"
+    },
+    "youmind:34001": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "43894043743e9e20456081b38b9c6db05103a008e7a5a29fae6097e826362c10"
+    },
+    "youmind:34061": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "e7eed015e20564333e5c2e51c03e0497e9fd8d383849918009f9fe04d82ec4ee"
+    },
+    "youmind:33949": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "b3544bc245c073794e446289aa62985977269e2f5d8641c1ea6d61d90f3bb374"
+    },
+    "youmind:33956": {
+      "decision": "include",
+      "reason": "Typography as compositional structure; ignore upstream batch count and use requested copy only.",
+      "prompt_sha256": "76a33845c0647dbd775d98d8df9a2583f7c0f38ca52704c77cf1b54e3a9999f3",
+      "category": "Posters & Typography",
+      "template_id": "conceptual-typography-poster",
+      "styles": [],
+      "scenes": []
+    },
+    "youmind:34774": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "a233d5094214da34cc4c73812a2c5831d4c63d71470c474a76582ec992be6e78"
+    },
+    "youmind:34033": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "47d01a2214e970a119321ec9e5a8bf1c8af963ae47246d0c200799b9c95e7a2a"
+    },
+    "youmind:34071": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "65d9e31b9d9e1434cec20abda85fada3f0fb6c0e13b8d9cb89f4e74ad840cc26"
+    },
+    "youmind:33962": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "6c3e254d0eadb1c258219ca645272052d2d8ece198db24d8dd91e57564f453a8"
+    },
+    "youmind:33916": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "f37d106f5ea679beabf647ff6fa07cf31ddd815fd656df9d32671462933b1559"
+    },
+    "youmind:33982": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "e0a1dc6728736d63a579faa18e170e0e8058e14c017566b38002450920a8b1a4"
+    },
+    "youmind:33693": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "ca06f8e47d5b0ffa1feac51e47674a783eb4e0823080ec939b49542fff81a775"
+    },
+    "youmind:33172": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "0b0d85109a10297c82e974f3ea597e88834472a753696db94d24c8c87d8430ae"
+    },
+    "youmind:33023": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "c47474aecde09364e30ef34a47aefa620c02be0483f96ba61706fcf304b2c815"
+    },
+    "youmind:32786": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "511cf78eb5ddb9305b7dd869b9713dabfdd41fe41779317e46c21a16723695e6"
+    },
+    "youmind:32486": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "0e59ec1f31d8ff9c4834dea196e9bb74d5c6d956f12b466e571e2c19e3356f56"
+    },
+    "youmind:32373": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "96187f394f5a52d3bc73c602b28494ad3d4465403c0ac2f71ead63e1f2382e19"
+    },
+    "youmind:32279": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "0aecea84d5b2ee8c11372ac5240b878cfc546449fbdfbbd9f989b2f2fc2bb1ec"
+    },
+    "youmind:32260": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "9f8b11268995b89f621d5805f92c208d76f73b2216b5a36bd4f8c2eeb1173758"
+    },
+    "youmind:32537": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "797e95f4d15a60b52d98291e021dbcc550265a559c653c7ab0eeb077b68e7fe5"
+    },
+    "youmind:32143": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "dab224a628fdeb13cb2996caed565db02853fc3ffcfa13854505c0d620b5e9ca"
+    },
+    "youmind:32077": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "a8d6c67c2f1936a1f786ee7a9e9cba5bf24f7dce8a80c37164411dcb9945898b"
+    },
+    "youmind:32070": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "2883554a95736b7adf47b79477429d8d5f8165f744dac109250bdcb2c26fc486"
+    },
+    "youmind:32068": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "d8c283c55aeb01175b6e49e93bfc07258221027921deb3ecabdc0bb111c9e0f8"
+    },
+    "youmind:32157": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "a890ce6118754d3e067e79a21baabc4e62890e91a52f3fa1ecc9bdf10b59b7dc"
+    },
+    "youmind:34466": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "97f4e1fc393373cb163c9fe6091b1652858c12b1e798167b1341707c909d69a9"
+    },
+    "youmind:34467": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "fa32f4815e59098d2d5effa231baf5232eb382c52836ca7db7968248f80749e4"
+    },
+    "youmind:34331": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "795b85a1cfbbd542cb38dcaadb506166b1bd9b7b80ba5acc511b16231f6dd3ce"
+    },
+    "youmind:34321": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "dc3cce316bb35f00d167d844c5dad3a9c75e574a7f6ed1040ced5f43d090341a"
+    },
+    "youmind:34317": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "8e5ca93c702fa67d99f3f4f53a1af576ee0fedef699b3ad2c24b35d0ac92b145"
+    },
+    "youmind:34314": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "e051024891304b5d2c546a0c4c86135f020676a956347ee0b4a926fc924aefb6"
+    },
+    "youmind:34327": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "677175dd87c1963dfbebf3156b1e9d9be692269d504cd129447bc83feb53aa0b"
+    },
+    "youmind:34219": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "341faf0ad7b16a935d9f84066896c5789ed56670429b12644909ad538d90bd14"
+    },
+    "youmind:34060": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "073f38f3347ab142717b86b812bbe9fa3ad78e8d3e34ccc6a0ffd2082327c47c"
+    },
+    "youmind:33991": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "12efa1474c05d5c1d1ea280942a7c8aaa34bddefc388ca9cf5c64138a7fa2c70"
+    },
+    "youmind:34058": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "1b6c8c0830819067d5f4143546440644ad253a10679f572bb8b4031d7e798c4b"
+    },
+    "youmind:34039": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "a6d128c5864bc19fc08f624371a2d6b5e81b3ccd2f276db8f251c4b22e5210a3"
+    },
+    "youmind:34066": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "6d977dc81afcbdd781a89b853f9e55cc324dc00e1a98f2aeb44a5ea642d1ddd7"
+    },
+    "youmind:34038": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "8f28afd91eeadaa1f3a9edecacdb3be0002af5dc3b2ff55f8fe99e084081b861"
+    },
+    "youmind:34043": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "a00788ef56bf994cf798bfb532cc35a25ca1746c572dc1fd6d31c3d287300733"
+    },
+    "youmind:34020": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "31835e027e2fd186bb15cf5ebb646ae286b984fcb3d9dcad787ea6dfd4a48d5a"
+    },
+    "youmind:34025": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "f4c843fab92ee6908832b81bad7b5e6b65b607e2174b25dbb1a38d8da0beffad"
+    },
+    "youmind:34756": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "b4e76d839bd78695b5e5f74d9d8d292524d85bbdfd25bac34ac01e3acb21ac98"
+    },
+    "youmind:34767": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "c2b3579d70958171c68445c2c856fcd94944d3c4e708b926078dc85d60110fea"
+    },
+    "youmind:34773": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "9469beaf67738f645c9b38c65b532163114f098a721252ea31928deef0e3c082"
+    },
+    "youmind:34681": {
+      "decision": "include",
+      "reason": "Distinct silhouette and explicit mascot identity constraints.",
+      "prompt_sha256": "73be60d1e4d50cdfe6f8ce5859a8947d792e8211a0a25404ce5de98241e0c0dc",
+      "category": "Brand & Logos",
+      "template_id": "brand-identity-package",
+      "styles": [],
+      "scenes": [
+        "Commerce"
+      ]
+    },
+    "youmind:34646": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "c792ea62e0c9122d8708d74215ab79e7a46ce74abd768e6cd8d85a7206c4b4cc"
+    },
+    "youmind:34643": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "c731eaa47dc4dcc20036fff7cea29a6353ba57daed9212a35282f649a2cadb84"
+    },
+    "youmind:34656": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "6e49dfb8cdfa0341fee2d7861212b4bf0f81d31866030ff8bd3e1e632fe0e30e"
+    },
+    "youmind:34639": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "c922e5f31bf24672d6a34182a70e9337cbfb02becbc998728260a1904e6edd5b"
+    },
+    "youmind:34461": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "e87893e3eea973199f1c2df016e4eb4617284166c4f9f223cf24c40858e48212"
+    },
+    "youmind:34470": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "3ddcf1b8725ee1d3541061046ecb90912111a5ff3fc86d1c3708d1579c550c09"
+    },
+    "youmind:33995": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "5b6b57f0de7208ff937938246ab594e4b8065e454b1d3734f745337496c03f1f"
+    },
+    "youmind:33954": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "1ef71ad01954d08de5590659745e9ee7c4d65905397d274d1a8ff419c4f910d0"
+    },
+    "youmind:34041": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "09ef9b1f7364aaa42013e40f74cf88d9b80ea0644dcf309e07048fdb3fa2616f"
+    },
+    "youmind:33936": {
+      "decision": "exclude",
+      "reason": "Advice and promotion rather than a self-contained prompt; asks to reuse generated identity references.",
+      "prompt_sha256": "e64b3b28a39755d6540b8ae14d8d357ab9fb4b2310c0f6d2cdfa6fa51d62394b"
+    },
+    "youmind:34017": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "6e05faac76b5c6cd2c6aee4a68a12df667e822ff5592927ffdbfcd5e58d076c3"
+    },
+    "youmind:33986": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "4a7a2099ab81dae9fbe08bef4ad152bccc53c1cc4fb91500e3f343954c8aad0e"
+    },
+    "youmind:33800": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "834601fa40351edc8c6447580771684c7bdfa9508d2e73950964ebd6127bb901"
+    },
+    "youmind:33797": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "6dda5271d454ea7323076c1ff42b4bf577761a7ea58fef696ec69fa165564486"
+    },
+    "youmind:33680": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "ce4aabbaac29a2eb2f750a3f160e0a21d8d767590cc5871489dcdda2cf5b3fde"
+    },
+    "youmind:33570": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "f46a5f248136e534ea3586cdf635b3f428247ee132ac1ab5f467862982575cd5"
+    },
+    "youmind:33572": {
+      "decision": "include",
+      "reason": "Reusable product angle, material texture and studio-lighting directions.",
+      "prompt_sha256": "54aac77f2486b5b378b384759d752b4e93340a4adcd58f13f1348581b493a5da",
+      "category": "Products & E-commerce",
+      "template_id": "product-commerce-visual",
+      "styles": [],
+      "scenes": [
+        "Commerce"
+      ]
+    },
+    "youmind:33614": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "a8f72e62c449f4159cc9814a655c1b053d5306fe6f9b59ae69802a449143a2a4"
+    },
+    "youmind:34035": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "59f3a22346dfbace66de6f6ce9ee6d18853488eb856d51134d31d89f728cd4c7"
+    },
+    "youmind:33543": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "a5a091992815d7093ab3d80035d53394e73502211c6c907fa848a3942e36ae22"
+    },
+    "youmind:33418": {
+      "decision": "include",
+      "reason": "Detailed product-led advertising composition; replace fictional branding and copy.",
+      "prompt_sha256": "85ab8356e0a68551bf48a40432e4f8f135c27d403b0ecd5d409821eefacf45d6",
+      "category": "Products & E-commerce",
+      "template_id": "product-commerce-visual",
+      "styles": [],
+      "scenes": [
+        "Commerce"
+      ]
+    },
+    "youmind:33320": {
+      "decision": "include",
+      "reason": "Structured product, scene, palette and composition controls; placeholders are reference data.",
+      "prompt_sha256": "0430c4e1469ac6053ad09766f12d808e8d2315afdefc64926274415581db106e",
+      "category": "Products & E-commerce",
+      "template_id": "product-commerce-visual",
+      "styles": [],
+      "scenes": [
+        "Commerce"
+      ]
+    },
+    "youmind:33216": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "5384e10ed62c8b330000655c2a6c79e4726f97d066928134c501f7ded6876f12"
+    },
+    "youmind:33257": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "b17cc1f34d574a72a175452a5fbd154b84d35698d42aacacc5b29c45515a88c8"
+    },
+    "youmind:33130": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "1ab6381099f276f298d145f3d74da6f1f0d026fa8d60f7fcd2b0406e9cb277fa"
+    },
+    "youmind:34650": {
+      "decision": "include",
+      "reason": "Reference silhouette material treatment; generated output still requires geometry QA.",
+      "prompt_sha256": "2257943425f1ccd5fda5f7f75876215947c1f68778b8135add12be5f4f66fe43",
+      "category": "Brand & Logos",
+      "template_id": "brand-identity-package",
+      "styles": [],
+      "scenes": [
+        "Commerce"
+      ]
+    },
+    "youmind:34329": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "5260b2aa03ee5526c36804d3cbeb288cce96121989d3d8bcdfdacb7b914a5094"
+    },
+    "youmind:34323": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "a915bcc3e6775747d3262bf42298bc5ad47bad415debbfa0080ff62fdaa6ec31"
+    },
+    "youmind:34328": {
+      "decision": "exclude",
+      "reason": "Not selected for the initial commercial release; retained in the candidate catalog for later review.",
+      "prompt_sha256": "f9960bdfa9fdecc50c9cfa09f2b7833958c426bd2d9b3d96b33dd2c81d266bcd"
+    }
+  }
+}

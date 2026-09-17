@@ -21,7 +21,9 @@ Read:
 - `$ARTIFACTS_DIR/image-node-prompt-pack.json`
 - `$ARTIFACTS_DIR/image-node-imagegen-packet.json`
 - `$ARTIFACTS_DIR/images/manifest.json`
-- Render output if present: `$render.output`
+- Parallel render receipt if present: `$ARTIFACTS_DIR/image-node-render-receipt.json`
+- Render stdout if present: `$render.output`
+- Deterministic render geometry receipt if present: `$validate-render.output`
 
 Write:
 - `$ARTIFACTS_DIR/qa-report.md`
@@ -48,10 +50,15 @@ Grounding checks (a citation must resolve, or must not be made):
 Prompt pack checks:
 - Required artifacts exist and contain parseable JSON where expected.
 - Concept count matches expected count.
+- In a 6-to-10 option batch, concepts are materially different in composition,
+  evidence focal point, framing, and type-image relationship. Cosmetic palette
+  swaps or the same template repeated ten times are a FAIL.
 - Every concept carries BOTH a `baked_prompt` and an `overlay_prompt`.
 - Overlay concepts include a `copy` object and a text-free scene with a
   forbid-text clause and reserved empty space.
 - Baked concepts quote `exact_text` verbatim when it was requested.
+- Exact-text baked prompts require letter-perfect copy, no extra words, no
+  duplicate text, explicit hierarchy/placement/contrast, and safe margins.
 - Negative constraints include no watermark, no random logos, no garbled text,
   and no extra text beyond requested copy.
 - No absolute local run paths, private system names, OpenAI API-key
@@ -75,6 +82,32 @@ Render checks:
 - If manifest status is `rendered`, image files must exist under
   `$ARTIFACTS_DIR/images/`, match the manifest count, and record which variant
   was rendered.
+- A rendered batch must carry one coordinator receipt with per-job start/end,
+  duration, output SHA-256, and Codex thread ownership when exposed. Duplicate
+  output hashes or more than three simultaneous render slots are a FAIL.
+- A batch of two or more concepts must include the deterministic review contact
+  sheet named by the manifest.
+- A rendered run must pass the deterministic `validate-render` geometry receipt.
+- Rendered aspect ratio must match the intake ratio within the deterministic
+  tolerance; a visually attractive wrong-ratio image is a FAIL, not a crop-ready
+  candidate.
+- For baked exact-text output, manually transcribe every visible character and
+  compare against `exact_text`. Missing punctuation, duplicate copy, stray
+  words, pipe separators, or garbled glyphs are a FAIL.
+- For English marketing creatives, floating screenshot boxes, pasted-looking
+  device rectangles, dead split columns, fake repeated-card grids, dashboard or
+  moodboard layouts, and purposeless empty regions are a FAIL unless explicitly
+  requested.
+- A legal/RUO footer closer than 5 percent of canvas height to the bottom edge
+  is a FAIL. A model-native surgical edit is the preferred repair; do not hide
+  the failure with an external assembled overlay.
+- If `qr_zone=reserve`, the render must contain a clean, intentional square safe
+  panel at least 18 percent of the shorter dimension, clear of copy and at least
+  5 percent from every edge. QR-like noise drawn by the model is a FAIL.
+- A final deliverable containing a QR must have a deterministic receipt from
+  `.archon/scripts/image-qr.py` and machine-decode to the exact approved HTTPS URL.
+  A QR that merely looks correct, decodes to another URL, or was invented by the
+  image model is a FAIL.
 - Any exact-text, brand or logo, likeness, or public-figure risk requires manual
   review even if the dry-run passes.
 - When `$intake.output.subject_mode` is `placeholder`: the literal token
