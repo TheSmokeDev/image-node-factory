@@ -1,92 +1,47 @@
 # Image Node Factory
 
-An [Archon](https://archon.diy) workflow that turns one natural-language visual
-brief into a production-ready image **prompt pack** -- and, optionally, rendered
-bitmaps via Codex built-in image generation. Built for marketing assets: posters,
-product shots, spokesperson heroes, brand boards, infographics.
+A portable Archon workflow: brief -> offline candidates -> AI selection -> verified grounding -> fresh prompt pack -> validation -> optional Codex built-in images.
 
-```bash
-archon workflow install image-node-factory
+## September 2026 corpus
 
-# one-time, per machine: provision the pinned style corpus (the only network step)
-uv run .archon/scripts/style-corpus.py prime
+- 541 primary examples and 22 templates from freestylefly (MIT).
+- 13 curated supplemental examples from ZeroLu (MIT) and YouMind (CC BY 4.0).
+- 198 supplementary entries reviewed; inclusion/exclusion decisions are shipped as metadata.
+- Full source prompts are downloaded into the user cache, never vendored here.
+- Source pins, SHA-256 hashes, author links, licenses and adaptation notices are retained.
 
-# then: one sentence in, a validated prompt pack out
-archon workflow run image-node-factory \
-  "confident spokesperson hero for a modern service brand, count=4 aspect=4:5 render_mode=baked"
-```
+The September refresh is a review candidate. Live comparison images were blocked by the configured image endpoint; no visual quality improvement or completed live render run is claimed.
 
-## What makes it different
+Install with `archon workflow install image-node-factory`, then run `uv run .archon/scripts/style-corpus.py prime` once. Generation stays offline with respect to corpus retrieval.
 
-**AI decides, script resolves, AI consumes.** The style intelligence comes from
-the MIT-licensed `awesome-gpt-image-2` corpus -- 511 worked cases and 22
-structured templates -- pinned to a commit and checksum-verified on every read.
-An AI node picks the template and cites case ids; a deterministic script resolves
-those ids offline against the pinned corpus. **A citation either resolves or is
-never stamped.** When nothing matches, the pack honestly declares
-`self_authored: true` instead of name-dropping a library it never read.
+Use `render=false` for prompt packs, or `render=true` for Codex built-in images. The render approval stages remain in the workflow. Both baked and text-free overlay variants are produced. English marketing copy defaults to baked; overlay is an explicit precision fallback.
 
-A second deterministic node, `validate-pack`, re-checks the finished pack against
-the physical grounding artifact and fails the run on any violation: a hollow
-citation, a cited case the corpus never resolved, mismatched provenance, more
-than 8 concepts, an empty prompt variant, or an absolute local path in pack text.
+Controls: `count=1..10`, `aspect=4:5`, `render_mode=baked|overlay`, `subject_mode=generic|placeholder`, `exact_text="..."`, `qr_zone=none|reserve`. Placeholder subjects block rendering until a suitable reference is supplied.
 
-## The DAG
+## Source tools
 
-```
-preflight -> intake -> select -> ground -> prompt-pack -> validate-pack -> render -> qa -> report
-             (AI)     (AI)     (script)      (AI)          (script)      (AI, opt)
-```
+- `style-corpus.py index` builds the full active case index offline.
+- `style-corpus.py verify` checks physical cache bytes.
+- `style-corpus.py select --query "lemon beverage campaign" --full` retrieves complete examples.
+- `style-corpus.py select --cases 532` retains legacy integer IDs.
+- `style-corpus.py select --refs youmind:34675 --full` uses source-qualified IDs.
+- `style-corpus.py update-report` compares upstream without changing the installation.
+- Global options `--pin` and `--cache-dir` go before the command. Only registered, hash-locked primary pins are accepted, including the July rollback pin.
 
-Every concept ships BOTH variants, so you choose per post with no re-run:
+Schema 2 adds example_case_refs, sources, citations and aliases. Legacy single-source packs remain supported. Mixed-source attribution is validated against the source lock and physical grounding. Complete exemplars are limited to five and 32,000 characters in total; oversized examples are reported rather than silently truncated.
 
-| Discipline | Meaning |
-|---|---|
-| `baked`   | Copy rendered inside the image |
-| `overlay` | Text-free scene + a separate copy JSON for crisp HTML overlay |
+## Portable and private behavior
 
-## Inline controls
+This package renders sequentially through the Codex built-in tool and validates files and geometry. It has no dependency on a private Homie checkout. Homie's three-slot coordinator, private brand configuration and identity assets are intentionally absent. No API-key renderer fallback is used.
 
-All parsed from the one brief string -- no YAML editing per run:
+QR composition is optional and deterministic: `uv run --with 'qrcode[pil]' --with zxing-cpp .archon/scripts/image-qr.py --help`. Generated images do not draw QR modules themselves.
 
-```
-category=<corpus category|auto>   render_mode=baked|overlay   aspect=<ratio>
-count=<1..8>                      render=true|false           exact_text="..."
-design_file=<path|none>           persona_pack=<path|none>
-subject_mode=generic|placeholder
-```
+## Verification
 
-`subject_mode=placeholder` is the brand-agnostic subject slot: the pack never
-invents a person or mascot -- every prompt carries a literal
-`[SUBJECT SUPPLIED AT RENDER TIME]` token your own renderer fills with its
-reference-locked subject. `validate-pack` enforces the token's presence; `render`
-blocks rather than drawing it literally.
+`uv run --with pytest --with pyyaml --with pillow --with 'qrcode[pil]' --with zxing-cpp pytest tests -q`
 
-## Safety
-
-- Default is `render=false`: prompt pack only, no image generation.
-- No API keys, no external services -- rendering uses Codex built-in image
-  generation only, and blocks cleanly when unavailable.
-- No node fetches the network. The corpus is provisioned once, out of band, by
-  `prime`, and lives at `~/.archon/cache/` -- it never enters your repo.
-- Packs are publish-safe by construction: no absolute paths, no invented brands,
-  people, or claims.
-
-## Layout
-
-```
-marketplace/image-node-factory/
-├── image-node-factory.yaml   # the workflow DAG
-├── commands/                 # 6 node prompts        -> .archon/commands/
-├── scripts/                  # style-corpus.py,
-│                             # pack-validate.py      -> .archon/scripts/
-└── image-nodes/              # 7 discipline cards    -> .archon/image-nodes/
-```
+Tests use synthetic fixtures. The optional active-cache test skips when the corpus has not been provisioned.
 
 ## Attribution
 
-Style corpus: [`freestylefly/awesome-gpt-image-2`](https://github.com/freestylefly/awesome-gpt-image-2)
-(MIT). The corpus is retrieved at provision time and attributed on every grounded
-artifact; it is never vendored into this repository.
-
--- SmokeDev
+Source repositories and license notices are recorded in `marketplace/image-node-factory/scripts/style-sources.json`. The workflow code is MIT licensed; third-party source licenses remain distinct. Prompt adaptations retain source attribution and do not imply endorsement.

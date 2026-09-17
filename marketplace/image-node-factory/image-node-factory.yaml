@@ -5,23 +5,24 @@ description: |
   A truly native Archon workflow that turns a natural language visual brief into
   a production-ready image prompt pack, then optional Codex-generated bitmaps.
   The intelligence comes from the awesome-gpt-image-2 style library, pinned and
-  checksum-verified into a local cache: 511 worked cases (ids run 1..514 with 3
-  gaps, so 514 is the highest id, NOT the count) and 22 structured templates
+  checksum-verified into a local cache: 541 primary worked cases plus 13 curated supplementary examples and 22 structured templates
   across 13 categories. The select node picks a template and cites case ids; the
   ground node resolves those ids offline against the pinned corpus. The library
   is not vendored into this repo. It is a pinned dependency the workflow
   resolves and attributes.
 
-  Two render disciplines are supported and the operator picks. Neither is forced:
-    baked   - text is rendered inside the image, the library native approach
-    overlay - a text-free scene plus a separate copy JSON for crisp HTML overlay,
-              the house discipline captured in .archon/image-nodes/ cards
+  Two render disciplines are supported. Baked is the default for visible English
+  marketing copy so typography and imagery are designed as one composition:
+    baked   - text is rendered inside the image, the primary marketing approach
+    overlay - a text-free scene plus separate copy JSON, used only as an explicit
+              precision/localization/legal fallback
 
   Input is a natural language visual brief. Optional inline controls:
     category=<library category or auto>
     render_mode=baked|overlay
     aspect=<ratio or size>
     count=<number>
+    parallelism=1 (portable renderer executes one concept at a time)
     render=true|false
     design_file=<optional relative brand design reference or none>
     persona_pack=<optional relative subject reference or none>
@@ -29,6 +30,7 @@ description: |
       subject; every prompt carries a [SUBJECT SUPPLIED AT RENDER TIME] slot a
       downstream renderer fills with its own reference-locked subject)
     exact_text="<verbatim copy for the baked variant>"
+    qr_zone=none|reserve (reserve composition only; real QR is deterministic post-render)
 
   Default behavior is render=false, which produces a prompt pack, packet, and
   manifest with BOTH a baked and an overlay variant, without generating images.
@@ -73,7 +75,7 @@ nodes:
         artifact_dir: artifactsDir,
         notes: [
           "The select and prompt-pack nodes call the gpt-image-2-style-library skill for template intelligence.",
-          "The prompt pack always emits both a baked variant and an overlay variant. The operator picks render_mode.",
+          "The prompt pack always emits both variants. Baked is the English marketing default; overlay is an explicit precision fallback.",
           "Codex image generation is used only when render_requested is true.",
           "Do not use OPENAI_API_KEY or fallback CLI/API rendering in this workflow.",
           "If built-in image generation is unavailable, the render node must write a blocked manifest."
@@ -102,10 +104,17 @@ nodes:
         count:
           type: number
           minimum: 1
-          maximum: 8
+          maximum: 10
+        parallelism:
+          type: number
+          minimum: 1
+          maximum: 3
         subject_mode:
           type: string
           enum: ["generic", "placeholder"]
+        qr_zone:
+          type: string
+          enum: ["none", "reserve"]
         category_hint:
           type: string
         aspect:
@@ -139,7 +148,9 @@ nodes:
         - render_requested
         - render_mode
         - count
+        - parallelism
         - subject_mode
+        - qr_zone
         - category_hint
         - aspect
         - exact_text
@@ -151,9 +162,15 @@ nodes:
         - constraints
         - risk_flags
 
+  - id: candidates
+    script: style-candidates
+    runtime: uv
+    depends_on: [intake]
+    timeout: 120000
+
   - id: select
     command: image-node-select
-    depends_on: [intake]
+    depends_on: [intake, candidates]
     context: fresh
     output_format:
       type: object
@@ -209,6 +226,12 @@ nodes:
             - brand-identity
             - people-character
             - infographic-explainer
+        example_case_refs:
+          type: array
+          items:
+            type: string
+        retrieval_query:
+          type: string
         example_case_ids:
           type: array
           items:
@@ -240,6 +263,8 @@ nodes:
         - category
         - discipline_card
         - example_case_ids
+        - example_case_refs
+        - retrieval_query
         - style_tags
         - scene_tags
         - prompt_structure
@@ -314,37 +339,74 @@ nodes:
     depends_on: [intake, ground, prompt-pack]
     timeout: 60000
 
-  - id: render
-    command: image-node-render
+  # THE RENDER GATE: the only lane in this factory that spends. Carries the
+  # same `when` as render, so a pack-only run (render_requested=false) never
+  # pauses and the prompt-pack lane stays fully unattended. NO on_reject: a
+  # reject CANCELS the run rather than reworking the pack, because the pack is
+  # already on disk at the paths below and re-running the factory against an
+  # edited brief is the cheaper correction than an in-run rewrite.
+  # This whole file is a born-clean public export rail: plain ASCII only, no
+  # em-dashes. Gate copy needs it twice over, since Archon renders yaml through
+  # a non-UTF-8 seam on this box and an em-dash reaches the operator as garble.
+  - id: render-gate
     depends_on: [intake, prompt-pack, validate-pack]
     when: "$intake.output.render_requested == 'true'"
+    approval:
+      message: |
+        IMAGE RENDER GATE - approve to spend on renders, reject to CANCEL.
+
+        Pack is validated and on disk: $prompt-pack.output.prompt_count prompt(s),
+        render_mode $prompt-pack.output.render_mode.
+
+          $prompt-pack.output.prompt_pack_md_path
+          $prompt-pack.output.manifest_path
+
+        Read the pack before approving - the Subject line is the usual defect.
+        Reply with the exact phrase APPROVE SPEND to render every prompt in
+        the pack. ANY other reply (including "no") stops the run at the next
+        node with the pack kept, nothing rendered - Archon treats every
+        non-slash reply as an approval, so the phrase check below guards the
+        spend.
+      capture_response: true
+
+  # SPEND SAFETY (issue #255 codex R3 blocker): the DAG enforces the verbatim
+  # phrase because Archon's NL-approval path approves on ANY non-slash reply.
+  - id: render-gate-check
+    depends_on: [render-gate]
+    when: "$intake.output.render_requested == 'true'"
+    bash: |
+      set -euo pipefail
+      RESP="$(cat <<'GATE255_INF_EOF'
+      $render-gate.output
+      GATE255_INF_EOF
+      )"
+      case "$RESP" in
+        *"APPROVE SPEND"*) echo "spend approved by exact phrase" ;;
+        *)
+          echo "SPEND REFUSED: reply lacked the exact phrase APPROVE SPEND"
+          printf 'captured reply: %s\n' "$RESP"
+          exit 1
+          ;;
+      esac
+    timeout: 30000
+
+  - id: render
+    command: image-node-render
     context: fresh
-    idle_timeout: 900000
-    output_format:
-      type: object
-      properties:
-        render_status:
-          type: string
-          enum: ["rendered", "blocked"]
-        render_mode:
-          type: string
-          enum: ["baked", "overlay"]
-        image_count:
-          type: number
-        manifest_path:
-          type: string
-        blocked_reason:
-          type: string
-      required:
-        - render_status
-        - render_mode
-        - image_count
-        - manifest_path
-        - blocked_reason
+    depends_on: [intake, prompt-pack, validate-pack, render-gate-check]
+    when: "$intake.output.render_requested == 'true'"
+    timeout: 3600000
+
+  - id: validate-render
+    script: image-render-validate
+    runtime: uv
+    depends_on: [intake, prompt-pack, render]
+    trigger_rule: none_failed_min_one_success
+    timeout: 60000
 
   - id: qa
     command: image-node-qa
-    depends_on: [prompt-pack, validate-pack, render]
+    depends_on: [prompt-pack, validate-pack, render, validate-render]
     trigger_rule: none_failed_min_one_success
     context: fresh
     output_format:

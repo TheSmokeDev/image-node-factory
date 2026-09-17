@@ -1,0 +1,94 @@
+{
+  "schema_version": 2,
+  "primary": {
+    "id": "freestylefly",
+    "repo": "freestylefly/awesome-gpt-image-2",
+    "active_pin": "0dc09c46c8a30b1fdd89c18cc78a894dac2104e3",
+    "license": "MIT",
+    "license_url": "https://opensource.org/license/mit",
+    "pins": {
+      "a04beebfa3195ef8dfbf1c57da7df9e989c2173b": {
+        "cases": 511,
+        "templates": 22,
+        "files": {
+          "cases.json": {
+            "path": "data/cases.json",
+            "sha256": "3c88ef3d3c15ca319992fc82f860de6674412fe913a585a50664fc2a687261b3"
+          },
+          "style-library.json": {
+            "path": "data/style-library.json",
+            "sha256": "80f5cae039d0d6f312f0e2de2c9b3fc8a806640b0d517c120d704a71c5e4aa72"
+          },
+          "templates.md": {
+            "path": "docs/templates.md",
+            "sha256": "f8e5009821d2099da51e23ab467ec9e938fdab34856e439ac36138c155eec926"
+          },
+          "LICENSE": {
+            "path": "LICENSE",
+            "sha256": "27a75c48bac29eb78f43c19f75c4e175974c8f1046d848d5562eae1ead2f1176"
+          }
+        }
+      },
+      "0dc09c46c8a30b1fdd89c18cc78a894dac2104e3": {
+        "cases": 541,
+        "templates": 22,
+        "files": {
+          "cases.json": {
+            "path": "data/cases.json",
+            "sha256": "a9ef652dffdac0802c656e4770f9793315292fa78e955d3e8c6e0e6346eb7da8"
+          },
+          "style-library.json": {
+            "path": "data/style-library.json",
+            "sha256": "80f5cae039d0d6f312f0e2de2c9b3fc8a806640b0d517c120d704a71c5e4aa72"
+          },
+          "templates.md": {
+            "path": "docs/templates.md",
+            "sha256": "f8e5009821d2099da51e23ab467ec9e938fdab34856e439ac36138c155eec926"
+          },
+          "LICENSE": {
+            "path": "LICENSE",
+            "sha256": "27a75c48bac29eb78f43c19f75c4e175974c8f1046d848d5562eae1ead2f1176"
+          }
+        }
+      }
+    }
+  },
+  "supplemental": [
+    {
+      "id": "zerolu",
+      "repo": "ZeroLu/awesome-gpt-image",
+      "pin": "a3f7c798dd3fc731511ad31079e6bb30fa7a6323",
+      "license": "MIT",
+      "license_url": "https://opensource.org/license/mit",
+      "files": {
+        "README.md": {
+          "path": "README.md",
+          "sha256": "f5d5cb168e9b8726ec7f04408f7d29afc612d5db014cd7288f8482ef97cd153a"
+        },
+        "LICENSE": {
+          "path": "LICENSE",
+          "sha256": "65d0863319198cb6f7a4d4bac395befd4099681bc371fd1a2a9ad9e35c02a738"
+        }
+      },
+      "expected_entries": 72
+    },
+    {
+      "id": "youmind",
+      "repo": "YouMind-OpenLab/awesome-gpt-image-2",
+      "pin": "1cb1d1f890a71a1dfbb3c38c745f8281eed75191",
+      "license": "CC-BY-4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "files": {
+        "README.md": {
+          "path": "README.md",
+          "sha256": "299ccc10728670fde5147ae8c8e4673aa358d2afc57e99091ae3c3ed14a95ec4"
+        },
+        "LICENSE": {
+          "path": "LICENSE",
+          "sha256": "cdf642acded97160b992064916cc1c7490ce5a8d8ccc70d8d6456e16976f9bd0"
+        }
+      },
+      "expected_entries": 126
+    }
+  ]
+}

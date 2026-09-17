@@ -98,3 +98,7 @@ If rendering succeeds, use:
 
 Write or update the artifacts first. Then output only valid JSON matching the
 render shape. No markdown, no commentary.
+
+## Physical render receipts
+
+Before declaring rendered, set expected_count and image_count on the manifest; for each saved image record filename, width, height and sha256 from the actual file. A skipped run uses status prompt_pack_only. The validate-render stage reads the files and checks the requested aspect ratio. Never substitute mock images.

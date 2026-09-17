@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Deterministic retrieval over a pinned, MIT-licensed image-prompt corpus.
+"""Deterministic retrieval over pinned image-prompt sources with distinct licenses.
 
 Ported skill: `gpt-image-2-style-library` (upstream: awesome-gpt-image-2).
 
@@ -36,42 +36,34 @@ import urllib.request
 from dataclasses import dataclass, field
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import style_sources as sources
+
 SKILL_NAME = "gpt-image-2-style-library"
-UPSTREAM_REPO = "freestylefly/awesome-gpt-image-2"
-UPSTREAM_PIN = "a04beebfa3195ef8dfbf1c57da7df9e989c2173b"
-UPSTREAM_LICENSE = "MIT"
+_LOCK = sources.manifest()["primary"]
+UPSTREAM_REPO = _LOCK["repo"]
+UPSTREAM_PIN = _LOCK["active_pin"]
+UPSTREAM_LICENSE = _LOCK["license"]
 UPSTREAM_HOME = f"https://github.com/{UPSTREAM_REPO}"
-
 _RAW = "https://raw.githubusercontent.com/{repo}/{pin}/{path}"
-
-# local name -> (upstream path, sha256 at UPSTREAM_PIN).
-# These digests are the Rule 2 anchor: every read re-hashes the cached bytes and
-# compares against this table. A sidecar "downloaded: true" marker is never trusted,
-# because a fetch killed midway leaves a truncated file that such a marker would bless.
-CORPUS_FILES: dict[str, tuple[str, str]] = {
-    "cases.json": (
-        "data/cases.json",
-        "3c88ef3d3c15ca319992fc82f860de6674412fe913a585a50664fc2a687261b3",
-    ),
-    "style-library.json": (
-        "data/style-library.json",
-        "80f5cae039d0d6f312f0e2de2c9b3fc8a806640b0d517c120d704a71c5e4aa72",
-    ),
-    "templates.md": (
-        "docs/templates.md",
-        "f8e5009821d2099da51e23ab467ec9e938fdab34856e439ac36138c155eec926",
-    ),
-    "LICENSE": (
-        "LICENSE",
-        "27a75c48bac29eb78f43c19f75c4e175974c8f1046d848d5562eae1ead2f1176",
-    ),
+PINNED_FILES = {
+    pin: {name: (entry["path"], entry["sha256"]) for name, entry in data["files"].items()}
+    for pin, data in _LOCK["pins"].items()
 }
+CORPUS_FILES = PINNED_FILES[UPSTREAM_PIN]
+
+
+def _files_for(pin):
+    if pin not in PINNED_FILES:
+        raise CorpusMissing(f"unregistered corpus pin: {pin}; add reviewed hashes first")
+    return PINNED_FILES[pin]
+
 
 CACHE_ENV = "ARCHON_PORT_CACHE_DIR"
 
 _DEFAULT_K = 5
-_EXEMPLAR_CHAR_CAP = 1200
-_EXEMPLAR_TOTAL_BUDGET = 8000
+_EXEMPLAR_CHAR_CAP = 32000
+_EXEMPLAR_TOTAL_BUDGET = 32000
 _HTTP_TIMEOUT_S = 60
 
 _W_CATEGORY = 3
@@ -103,6 +95,9 @@ class Case:
     scenes: tuple[str, ...]
     featured: bool
     source_url: str
+    ref: str = ""
+    source: str = "freestylefly"
+    author: str = ""
 
 
 @dataclass(frozen=True)
@@ -121,6 +116,8 @@ class Corpus:
     pin: str
     cases: dict[int, Case]
     templates: dict[str, Template]
+    supplemental: dict[str, Case] = field(default_factory=dict)
+    source_info: dict = field(default_factory=dict)
 
     @property
     def template_ids(self) -> tuple[str, ...]:
@@ -137,6 +134,8 @@ class Exemplar:
     scenes: tuple[str, ...]
     source_url: str
     truncated: bool
+    ref: str = ""
+    author: str = ""
 
 
 @dataclass(frozen=True)
@@ -147,6 +146,7 @@ class Grounding:
     unresolved_case_ids: tuple[int, ...]
     exemplars: tuple[Exemplar, ...] = ()
     provenance: dict = field(default_factory=dict)
+    excluded: tuple[dict, ...] = ()
 
     def summary(self) -> dict:
         """Small payload for stdout, so `$node.output.grounded` stays cheap."""
@@ -161,9 +161,12 @@ class Grounding:
 
     def full(self) -> dict:
         payload = self.summary()
+        payload["excluded_examples"] = list(self.excluded)
         payload["exemplars"] = [
             {
                 "id": e.id,
+                "ref": e.ref or f"freestylefly:{e.id}",
+                "author": e.author,
                 "title": e.title,
                 "prompt": e.prompt,
                 "category": e.category,
@@ -206,6 +209,7 @@ def corpus_dir(*, pin: "str | None" = None, cache_dir=None) -> Path:
 def prime(*, pin=None, cache_dir=None, force=None) -> Path:
     """ONLINE. Fetch, verify, and atomically install the corpus. Never called in a DAG."""
     resolved_pin = pin or UPSTREAM_PIN
+    files = _files_for(resolved_pin)
     force = bool(force)
     target = corpus_dir(pin=resolved_pin, cache_dir=cache_dir)
 
@@ -219,10 +223,10 @@ def prime(*, pin=None, cache_dir=None, force=None) -> Path:
     target.parent.mkdir(parents=True, exist_ok=True)
     staging = Path(tempfile.mkdtemp(prefix=f"{resolved_pin[:8]}.tmp.", dir=target.parent))
     try:
-        for name, (path, expected) in CORPUS_FILES.items():
+        for name, (path, expected) in files.items():
             raw = _http_get(_RAW.format(repo=UPSTREAM_REPO, pin=resolved_pin, path=path))
             actual = _sha256(raw)
-            if resolved_pin == UPSTREAM_PIN and actual != expected:
+            if actual != expected:
                 raise CorpusMissing(
                     f"{path}: sha256 mismatch at pin {resolved_pin[:8]}\n"
                     f"  expected {expected}\n  actual   {actual}\n"
@@ -250,17 +254,16 @@ def require_corpus(*, pin=None, cache_dir=None) -> Corpus:
     if not root.is_dir():
         raise CorpusMissing(hint)
 
-    for name, (_path, expected) in CORPUS_FILES.items():
+    for name, (_path, expected) in _files_for(resolved_pin).items():
         f = root / name
         if not f.is_file():
             raise CorpusMissing(f"{hint}\n  missing file: {name}")
-        if resolved_pin == UPSTREAM_PIN:
-            actual = _sha256(f.read_bytes())
-            if actual != expected:
-                raise CorpusMissing(
-                    f"{hint}\n  corrupt file: {name}\n"
-                    f"  expected {expected}\n  actual   {actual}"
-                )
+        actual = _sha256(f.read_bytes())
+        if actual != expected:
+            raise CorpusMissing(
+                f"{hint}\n  corrupt file: {name}\n"
+                f"  expected {expected}\n  actual   {actual}"
+            )
 
     return _load(root, resolved_pin)
 
@@ -281,6 +284,7 @@ def _load(root: Path, pin: str) -> Corpus:
             scenes=tuple(c.get("scenes") or ()),
             featured=bool(c.get("featured")),
             source_url=str(c.get("sourceUrl") or ""),
+            author=str(c.get("sourceLabel") or ""),
         )
 
     raw_lib = json.loads((root / "style-library.json").read_text(encoding="utf-8"))
@@ -294,7 +298,21 @@ def _load(root: Path, pin: str) -> Corpus:
             scenes=tuple(t.get("scenes") or ()),
             example_cases=tuple(int(x) for x in (t.get("exampleCases") or ())),
         )
-    return Corpus(root=root, pin=pin, cases=cases, templates=templates)
+    extra, info = {}, {}
+    if pin == UPSTREAM_PIN:
+        try:
+            included, _catalog, info = sources.load(root.parent.parent)
+        except sources.SourceError as exc:
+            raise CorpusMissing(str(exc)) from exc
+        for row in included:
+            extra[row["ref"]] = Case(
+                id=0, title=row["title"], prompt=row["prompt"], category=row["category"],
+                styles=tuple(row.get("styles", [])), scenes=tuple(row.get("scenes", [])),
+                featured=False, source_url=row["source_url"], ref=row["ref"],
+                source=row["source"], author=row["author"],
+            )
+    return Corpus(root=root, pin=pin, cases=cases, templates=templates,
+                  supplemental=extra, source_info=info)
 
 
 def _truncate(prompt: str, cap: int) -> tuple[str, bool]:
@@ -312,109 +330,162 @@ def _provenance(corpus: Corpus) -> dict:
         "prompt_engine": SKILL_NAME,
         "corpus_pin": corpus.pin,
         "corpus_source": UPSTREAM_HOME,
-        "corpus_sha256": CORPUS_FILES["cases.json"][1],
+        "corpus_sha256": _files_for(corpus.pin)["cases.json"][1],
         "license": UPSTREAM_LICENSE,
     }
 
 
-def select(
-    corpus: Corpus,
-    *,
-    template_id=None,
-    category=None,
-    styles=None,
-    scenes=None,
-    case_ids=None,
-    lang=None,
-    k=None,
-) -> Grounding:
-    """Deterministic taxonomy retrieval. No embeddings, no LLM.
+def _ref(case):
+    return case.ref or f"freestylefly:{case.id}"
 
-    Rule 1: every tunable arrives as a None sentinel and is resolved here, so a
-    test or a caller can override it without fighting a cached def-time default.
 
-    The framework embedder is English-only and the corpus is bilingual, so vector
-    search would be quietly wrong. Ranking follows the skill's own documented
-    selection order instead: category, then style tag, then scene tag, then the
-    template's own nearest example cases.
+def _record(case):
+    return {"ref": _ref(case), "title": case.title, "prompt": case.prompt,
+            "category": case.category, "styles": list(case.styles), "scenes": list(case.scenes)}
+
+
+def select(corpus: Corpus, *, template_id=None, category=None, styles=None,
+           scenes=None, case_ids=None, case_refs=None, lang=None, k=None, query=None) -> Grounding:
+    """Offline lexical + taxonomy retrieval with legacy integer anchors.
+
+    Complete examples only; reference data cannot alter workflow instructions.
+    Exact text duplicates share aliases. A shared article URL alone is NOT a
+    duplicate: a single article can contain several different useful prompts.
     """
-    k = _DEFAULT_K if k is None else int(k)
+    k = min(5, max(1, _DEFAULT_K if k is None else int(k)))
     lang = (lang or "").lower() or None
-    want_styles = {s for s in (styles or ())}
-    want_scenes = {s for s in (scenes or ())}
-
     tpl = corpus.templates.get(template_id) if template_id else None
     if template_id and tpl is None:
         raise UsageError(f"unknown template_id: {template_id}")
+    want_styles, want_scenes = set(styles or ()), set(scenes or ())
     example_ids = set(tpl.example_cases) if tpl else set()
-
-    pool = list(corpus.cases.values())
+    pool = list(corpus.cases.values()) + list(corpus.supplemental.values())
     if lang == "en":
         pool = [c for c in pool if not _CJK.search(c.prompt)]
-
-    # Cited ids are ANCHORS, not a replacement for ranking: the caller names the
-    # template's nearest cases, then taxonomy tops the slate up to k. Ids 1..514 have
-    # 3 gaps, so an unknown id is a normal "cited but absent" outcome, kept
-    # distinguishable from "matched zero".
-    available = {c.id for c in pool}
-    unresolved: list[int] = []
-    anchors: list[Case] = []
-    seen: set[int] = set()
-    for cid in case_ids or ():
-        cid = int(cid)
-        if cid in available and cid not in seen:
-            anchors.append(corpus.cases[cid])
-            seen.add(cid)
-        elif cid not in available:
-            unresolved.append(cid)
-
+    if query and category and any(c.category == category for c in pool):
+        explicit = set(case_refs or ()) | {f"freestylefly:{int(i)}" for i in (case_ids or ())}
+        pool = [c for c in pool if c.category == category or _ref(c) in explicit]
+    available = {_ref(c): c for c in pool}
+    lexical = sources.lexical_scores(query or "", [_record(c) for c in pool])
+    requested = [f"freestylefly:{int(i)}" for i in (case_ids or ())] + list(case_refs or ())
+    anchors, unresolved, seen = [], [], set()
+    for ref in requested:
+        if ref not in available:
+            unresolved.append(ref)
+        elif ref not in seen:
+            anchors.append(available[ref]); seen.add(ref)
     scored = []
     for c in pool:
-        if c.id in seen:
+        if _ref(c) in seen:
             continue
-        score = 0
-        if category and c.category == category:
-            score += _W_CATEGORY
+        score = lexical[_ref(c)] * 3
+        score += _W_CATEGORY if category and c.category == category else 0
         score += _W_STYLE * len(want_styles.intersection(c.styles))
         score += _W_SCENE * len(want_scenes.intersection(c.scenes))
-        if c.id in example_ids:
+        if c.source == "freestylefly" and c.id in example_ids:
             score += _W_EXAMPLE_CASE
         if score > 0:
             scored.append((score, c))
-    # id is unique and terminal, so the ordering is a total order: stable output.
-    scored.sort(key=lambda sc: (-sc[0], not sc[1].featured, sc[1].id))
+    scored.sort(key=lambda sc: (-sc[0], not sc[1].featured, _ref(sc[1])))
     ranked = anchors + [c for _score, c in scored]
-
-    exemplars: list[Exemplar] = []
+    byhash = {}
+    for c in pool:
+        byhash.setdefault(sources.sha(sources.normal(c.prompt).encode()), []).append(c)
+    chosen, excluded, fingerprints = [], [], set()
     budget = _EXEMPLAR_TOTAL_BUDGET
-    for c in ranked[:k]:
-        text, truncated = _truncate(c.prompt, _EXEMPLAR_CHAR_CAP)
-        if exemplars and len(text) > budget:
+    for c in ranked:
+        fingerprint = sources.sha(sources.normal(c.prompt).encode())
+        if fingerprint in fingerprints:
+            excluded.append({"ref":_ref(c), "reason":"duplicate_prompt"})
+            continue
+        if len(c.prompt) > budget:
+            excluded.append({"ref":_ref(c), "reason":"complete_prompt_exceeds_remaining_budget", "characters":len(c.prompt)})
+            continue
+        chosen.append(c); fingerprints.add(fingerprint); budget -= len(c.prompt)
+        if len(chosen) == k:
             break
-        budget -= len(text)
-        exemplars.append(
-            Exemplar(
-                id=c.id,
-                title=c.title,
-                prompt=text,
-                category=c.category,
-                styles=c.styles,
-                scenes=c.scenes,
-                source_url=c.source_url,
-                truncated=truncated,
-            )
-        )
+    exemplars = tuple(Exemplar(c.id, c.title, c.prompt, c.category, c.styles, c.scenes,
+                              c.source_url, False, _ref(c), c.author) for c in chosen)
+    provenance = _provenance(corpus) if chosen else {}
+    if chosen:
+        aliases, citations, source_ids = {}, [], set()
+        for c in chosen:
+            group = byhash[sources.sha(sources.normal(c.prompt).encode())]
+            aliases[_ref(c)] = sorted(_ref(a) for a in group if _ref(a) != _ref(c))
+            for alias in group:
+                source_ids.add(alias.source)
+                citations.append({"ref":_ref(alias),"author":alias.author,"source_url":alias.source_url,
+                                  "changes":"Used as a structural reference; generated wording is new."})
+        primary = {"id":"freestylefly", "repo":UPSTREAM_REPO, "pin":corpus.pin,
+                   "sha256":_files_for(corpus.pin)["cases.json"][1], "license":"MIT",
+                   "license_url":_LOCK["license_url"]}
+        source_list = [primary if sid == "freestylefly" else corpus.source_info[sid] for sid in sorted(source_ids)]
+        licenses = sorted({s["license"] for s in source_list})
+        provenance.update(schema_version=2, resolved_case_refs=[_ref(c) for c in chosen],
+                          unresolved_case_refs=unresolved, sources=source_list, citations=citations,
+                          aliases=aliases, license=licenses[0] if len(licenses)==1 else "MIXED")
+    return Grounding(bool(chosen), len(ranked),
+                     tuple(c.id for c in chosen if c.source=="freestylefly"),
+                     tuple(int(r.split(":",1)[1]) for r in unresolved if r.startswith("freestylefly:") and r.split(":",1)[1].isdigit()),
+                     exemplars, provenance, tuple(excluded))
 
-    grounded = bool(exemplars)
-    return Grounding(
-        grounded=grounded,
-        matched=len(ranked),
-        resolved_case_ids=tuple(e.id for e in exemplars),
-        unresolved_case_ids=tuple(unresolved),
-        exemplars=tuple(exemplars),
-        # A citation is stamped only when it resolves. Nothing to cite, nothing stamped.
-        provenance=_provenance(corpus) if grounded else {},
-    )
+
+def candidate_catalog(corpus, query, category=None, limit=24):
+    cases = list(corpus.cases.values()) + list(corpus.supplemental.values())
+    if category and any(c.category == category for c in cases):
+        cases = [c for c in cases if c.category == category]
+    scores = sources.lexical_scores(query, [_record(c) for c in cases])
+    ordered = sorted(cases, key=lambda c: (-(scores[_ref(c)] * 3 + (3 if c.category==category else 0)), _ref(c)))
+    result, seen = [], set()
+    for c in ordered:
+        fingerprint = sources.sha(sources.normal(c.prompt).encode())
+        score = scores[_ref(c)] * 3 + (3 if c.category==category else 0)
+        if score <= 0 or fingerprint in seen:
+            continue
+        seen.add(fingerprint)
+        result.append({"ref":_ref(c),"title":c.title,"category":c.category,"styles":list(c.styles),
+                       "scenes":list(c.scenes),"characters":len(c.prompt),"score":round(score,4),"source_url":c.source_url})
+        if len(result) >= limit:
+            break
+    return result
+
+
+def active_index(corpus):
+    cases = list(corpus.cases.values()) + list(corpus.supplemental.values())
+    groups, links = {}, {}
+    for case in cases:
+        groups.setdefault(sources.sha(sources.normal(case.prompt).encode()), []).append(case)
+        if case.source_url:
+            links.setdefault(sources.source_identity(case.source_url), []).append(_ref(case))
+    rows = []
+    for digest, group in sorted(groups.items(), key=lambda pair: min(_ref(c) for c in pair[1])):
+        ordered = sorted(group, key=_ref)
+        first = ordered[0]
+        rows.append({"ref":_ref(first), "aliases":[_ref(c) for c in ordered[1:]],
+                     "title":first.title, "category":first.category,
+                     "styles":list(first.styles), "scenes":list(first.scenes),
+                     "prompt_sha256":digest, "characters":len(first.prompt),
+                     "citations":[{"ref":_ref(c),"author":c.author,"source_url":c.source_url} for c in ordered]})
+    return {"schema_version":2, "primary_pin":corpus.pin, "record_count":len(cases),
+            "unique_prompt_count":len(rows), "template_ids":list(corpus.template_ids),
+            "cases":rows, "shared_source_links":{url:sorted(refs) for url,refs in sorted(links.items()) if len(refs)>1}}
+
+
+def _cmd_index(args):
+    print(json.dumps(active_index(require_corpus(pin=args.pin, cache_dir=args.cache_dir)), ensure_ascii=False, indent=2))
+    return 0
+
+
+def _cmd_candidates(args):
+    artifacts = Path(os.environ["ARTIFACTS_DIR"])
+    brief = json.loads((artifacts / "image-node-brief.json").read_text(encoding="utf-8"))
+    corpus = require_corpus(cache_dir=args.cache_dir)
+    query = str(brief.get("brief") or brief.get("request") or brief.get("primary_request") or json.dumps(brief))
+    candidates = candidate_catalog(corpus, query, brief.get("category_hint"))
+    payload = {"schema_version":2,"candidates":candidates,"template_ids":list(corpus.template_ids)}
+    (artifacts / "image-node-candidates.local.json").write_text(json.dumps(payload,ensure_ascii=False,indent=2),encoding="utf-8")
+    print(json.dumps({"candidate_count":len(candidates),"catalog":"image-node-candidates.local.json"}))
+    return 0
 
 
 def template_body(corpus: Corpus, template_id: str) -> str:
@@ -463,6 +534,8 @@ def _cmd_ground(args) -> int:
         styles=sel.get("style_tags") or None,
         scenes=sel.get("scene_tags") or None,
         case_ids=ids,
+        case_refs=sel.get("example_case_refs"),
+        query=sel.get("retrieval_query"),
         lang=args.lang,
         k=args.k,
     )
@@ -479,6 +552,8 @@ def _cmd_ground(args) -> int:
 
 
 def _cmd_prime(args) -> int:
+    if not args.pin or args.pin == UPSTREAM_PIN:
+        sources.prime(args.cache_dir)
     root = prime(pin=args.pin, cache_dir=args.cache_dir, force=args.force)
     corpus = require_corpus(pin=args.pin, cache_dir=args.cache_dir)
     print(
@@ -537,6 +612,8 @@ def _cmd_select(args) -> int:
         styles=_csv(args.styles),
         scenes=_csv(args.scenes),
         case_ids=ids,
+        case_refs=_csv(args.refs),
+        query=args.query,
         lang=args.lang,
         k=args.k,
     )
@@ -573,6 +650,8 @@ def build_parser() -> argparse.ArgumentParser:
     sl.add_argument("--styles", default=None, help="comma separated")
     sl.add_argument("--scenes", default=None, help="comma separated")
     sl.add_argument("--cases", default=None, help="comma separated ids")
+    sl.add_argument("--refs", default=None, help="comma separated source-qualified references")
+    sl.add_argument("--query", default=None)
     sl.add_argument("--lang", default=None, choices=["en"])
     sl.add_argument("--k", type=int, default=None)
     sl.add_argument("--full", action="store_true", help="include exemplar bodies")
@@ -586,6 +665,10 @@ def build_parser() -> argparse.ArgumentParser:
     sg.add_argument("--lang", default=None, choices=["en"])
     sg.add_argument("--k", type=int, default=None)
     sg.set_defaults(func=_cmd_ground)
+    sub.add_parser("index", help="OFFLINE: complete active case index with provenance aliases").set_defaults(func=_cmd_index)
+    sub.add_parser("candidates", help="OFFLINE: generate brief-specific candidate index").set_defaults(func=_cmd_candidates)
+    sub.add_parser("update-report", help="ONLINE: compare upstream, never activate").set_defaults(
+        func=lambda args: print(json.dumps(sources.update_report(args.cache_dir),indent=2)) or 0)
     return p
 
 
@@ -598,7 +681,7 @@ def main(argv=None) -> int:
     args = build_parser().parse_args(argv)
     try:
         return args.func(args)
-    except (CorpusMissing, UsageError) as exc:
+    except (CorpusMissing, UsageError, sources.SourceError, OSError, ValueError) as exc:
         print(f"style-corpus: {exc}", file=sys.stderr)
         return 1
 

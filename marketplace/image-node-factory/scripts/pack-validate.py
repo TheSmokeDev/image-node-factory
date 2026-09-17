@@ -30,10 +30,10 @@ SUBJECT_SENTINEL = "[SUBJECT SUPPLIED AT RENDER TIME]"
 _PROVENANCE_EQUAL = ("prompt_engine", "corpus_pin", "corpus_sha256", "license")
 _PROVENANCE_FORBIDDEN_UNGROUNDED = _PROVENANCE_EQUAL + (
     "prompt_engine_attribution",
-    "example_case_ids",
+    "example_case_ids", "example_case_refs", "sources", "citations", "aliases",
 )
 
-_MAX_CONCEPTS = 8
+_MAX_CONCEPTS = 10
 
 # Marketplace-public backstop: a pack must never carry an absolute local path.
 # The lookbehind keeps `https://` (the corpus_source URL) from matching as a
@@ -109,16 +109,49 @@ def validate_pack(artifacts_dir: Path) -> dict:
 
     grounded = bool(grounding.get("grounded"))
     if grounded:
-        resolved = set(grounding.get("resolved_case_ids") or [])
-        cited = pack.get("example_case_ids")
-        if not isinstance(cited, list) or not cited:
-            violations.append("grounded run but pack cites no example_case_ids")
+        if grounding.get("schema_version") == 2:
+            if pack.get("schema_version") != 2:
+                violations.append("multi-source grounding requires schema_version=2")
+            refs = pack.get("example_case_refs")
+            resolved_refs = grounding.get("resolved_case_refs") or []
+            if not isinstance(refs, list) or not refs or refs != resolved_refs:
+                violations.append("example_case_refs must match the resolved grounding references")
+            for key in ("sources", "citations", "aliases"):
+                if key not in pack or pack[key] != grounding.get(key):
+                    violations.append(f"provenance mismatch on {key}")
+            actual = {e.get("ref") for e in grounding.get("exemplars", []) if e.get("prompt")}
+            if set(resolved_refs) - actual:
+                violations.append("grounding references have no complete exemplar bodies")
+            source_rows = grounding.get("sources") or []
+            source_ids = {row.get("id") for row in source_rows}
+            if any(ref.split(":",1)[0] not in source_ids for ref in resolved_refs):
+                violations.append("a cited reference has no source provenance")
+            licenses = sorted({row.get("license") for row in source_rows if row.get("license")})
+            expected_license = licenses[0] if len(licenses)==1 else "MIXED"
+            if pack.get("license") != expected_license:
+                violations.append("incorrect aggregate license for source set")
+            # The immutable source lock, not a model's claim, defines valid pins.
+            lock = json.loads((Path(__file__).with_name("style-sources.json")).read_text(encoding="utf-8"))
+            for row in source_rows:
+                if row.get("id") == "freestylefly":
+                    spec = lock["primary"]
+                    pin = spec["pins"].get(row.get("pin"), {})
+                    digest = pin.get("files", {}).get("cases.json", {}).get("sha256")
+                else:
+                    spec = next((s for s in lock["supplemental"] if s["id"]==row.get("id") and s["pin"]==row.get("pin")), {})
+                    digest = spec.get("files", {}).get("README.md", {}).get("sha256")
+                if not spec or not digest or any(row.get(k)!=spec.get(k) for k in ("repo","license","license_url")) or row.get("sha256")!=digest:
+                    violations.append(f"unregistered source provenance: {row.get('id')}")
+            expected_ids = [int(ref.split(":",1)[1]) for ref in resolved_refs if ref.startswith("freestylefly:")]
+            if pack.get("example_case_ids", []) != expected_ids:
+                violations.append("legacy case IDs disagree with source-qualified references")
         else:
-            stray = [i for i in cited if i not in resolved]
-            if stray:
-                violations.append(
-                    f"pack cites case ids the grounding never resolved: {stray}"
-                )
+            resolved = set(grounding.get("resolved_case_ids") or [])
+            cited = pack.get("example_case_ids")
+            if not isinstance(cited, list) or not cited:
+                violations.append("grounded run but pack cites no example_case_ids")
+            elif any(i not in resolved for i in cited):
+                violations.append(f"pack cites case ids the grounding never resolved: {[i for i in cited if i not in resolved]}")
         for key in _PROVENANCE_EQUAL:
             if pack.get(key) != grounding.get(key):
                 violations.append(
